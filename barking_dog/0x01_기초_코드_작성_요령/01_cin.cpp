@@ -10,7 +10,7 @@ int main()
     // 공백이 포함된 문자 입력 받기
     string s;
     getline(cin, s);
-    cout << s;
+    cout << s << endl;
 
     return 0;
 }
