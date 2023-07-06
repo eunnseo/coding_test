@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stack>
 #include <vector>
 using namespace std;
 
@@ -11,37 +10,73 @@ int main()
     int n;
     cin >> n;
 
-    stack<int> s;
+    int top_num = 0;
+    vector<int> stack;
     vector<char> result;
 
+    bool ok = true;
     while (n--)
     {
+        
+
         int input;
         cin >> input;
 
-        if (s.top() == input)
+        if (input == top_num)
         {
-            s.pop();
+            stack.pop_back();
             result.push_back('-');
         }
-        else if (s.top() < input)
+        else if (input > top_num)
         {
-            while (s.top() <= input)
+            while (input > top_num)
             {
-                s.push(s.top() + 1);
+                top_num++;
+                stack.push_back(top_num);
                 result.push_back('+');
             }
-            s.pop();
+            stack.pop_back();
             result.push_back('-');
         }
         else
         {
-            while (s.top() >= input)
+            if (stack.empty() || stack.back() < input)
             {
-                s.pop();
+                ok = false;
+                break;
+            }
+            while ( (!stack.empty()) && (stack.back() >= input) )
+            {
+                stack.pop_back();
                 result.push_back('-');
             }
         }
+        
+        // cout << "stack: ";
+        // for (auto iter = stack.begin(); iter != stack.end(); iter++)
+        // {
+        //     cout << *iter << " ";
+        // }
+        // cout << endl;
+        // cout << "result: ";
+        // for (auto iter = result.begin(); iter != result.end(); iter++)
+        // {
+        //     cout << *iter << " ";
+        // }
+        // cout << endl;
+        // cout << "top_num = " << top_num << endl;
+    }
+
+    if (ok)
+    {
+        for (auto iter = result.begin(); iter != result.end(); iter++)
+        {
+            cout << *iter << "\n";
+        }
+    }
+    else
+    {
+        cout << "NO\n";
     }
 
     return 0;

@@ -25,10 +25,6 @@ int main()
         {
             s.push(n);
         }
-
-        for (int i = 0; i < s.size(); i++)
-        {
-        }
     }
 
     int sum = 0;
