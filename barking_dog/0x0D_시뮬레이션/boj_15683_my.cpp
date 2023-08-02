@@ -20,13 +20,13 @@ void bfsCheck(pair<int, int> curr, int dir)
     {
         int nx = curr.X + dx[dir];
         int ny = curr.Y + dy[dir];
+        curr = {nx, ny};
 
         if (nx < 0 || ny < 0 || nx >= row || ny >= col) return;
         if (board[nx][ny] == 6) return;
         if (board[nx][ny] != 0) continue;
 
         board[nx][ny] = -1;
-        curr = {nx, ny};
     }
 }
 
@@ -45,20 +45,8 @@ int countZero()
 
 void run(int idx)
 {
-    cout << "idx = " << idx << endl;
-
     if (idx == cctv_pos.size())
     {
-        cout << "board: " << endl;
-        for (int r = 0; r < row; r++)
-        {
-            for (int c = 0; c < col; c++)
-            {
-                cout << board[r][c] << " ";
-            }
-            cout << "\n";
-        }
-        
         int n_zero = countZero();
         if (n_zero < min_zero) min_zero = n_zero;
         return;
