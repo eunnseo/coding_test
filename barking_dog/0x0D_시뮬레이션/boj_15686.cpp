@@ -10,8 +10,45 @@ int N, M;
 int min_ccd = 50 * 50 * 13;
 vector<pair<int, int>> houses;
 vector<pair<int, int>> chickens;
-vector<pair<int, int>> arr(14);
+vector<pair<int, int>> picked(14);
 int isused[14];
+
+void printHouses()
+{
+    cout << "houses > " << endl;
+    for (auto iter = houses.begin(); iter != houses.end(); iter++)
+    {
+        cout << "(" << iter->X << ", " << iter->Y << ") | ";
+    }
+    cout << endl;
+}
+void printChickens()
+{
+    cout << "chickens > " << endl;
+    for (auto iter = chickens.begin(); iter != chickens.end(); iter++)
+    {
+        cout << "(" << iter->X << ", " << iter->Y << ") | ";
+    }
+    cout << endl;
+}
+void printPicked()
+{
+    cout << "picked > " << endl;
+    for (int i = 0; i < M; i++)
+    {
+        cout << "(" << picked[i].X << ", " << picked[i].Y << ") | ";
+    }
+    cout << endl;
+}
+void printIsused()
+{
+    cout << "isused > " << endl;
+    for (int i = 0; i < N; i++)
+    {
+        cout << isused[i] << ", ";
+    }
+    cout << endl;
+}
 
 void calcCityChickenDist()
 {
@@ -21,7 +58,7 @@ void calcCityChickenDist()
         int cd = 50 * 50; // 치킨 거리
         for (int i = 0; i < M; i++)
         {
-            int d = abs(h->X - arr[i].X) + abs(h->Y - arr[i].Y);
+            int d = abs(h->X - picked[i].X) + abs(h->Y - picked[i].Y);
             if (d < cd) cd = d;
         }
         ccd += cd;
@@ -31,21 +68,31 @@ void calcCityChickenDist()
     return;
 }
 
-void run(int idx)
+void run(int idx, int start)
 {
+    cout << "idx = " << idx << ", start = " << start << endl;
+    printPicked();
+    printIsused();
+    cout << endl;
+
     if (idx == M)
     {
+        cout << "!!!!!!!!!! idx == M !!!!!!!!!!" << endl;
+        cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
         calcCityChickenDist();
+        cout << endl;
         return;
     }
 
-    for (int i = idx; i < chickens.size(); i++)
+    for (int i = start; i < chickens.size(); i++)
     {
         if (!isused[i])
         {
+            cout << "idx = " << idx << ", start = " << start << ", i = " << i << endl;
+            cout << endl;
             isused[i] = true;
-            arr[idx] = chickens[i];
-            run(idx + 1);
+            picked[idx] = chickens[i];
+            run(idx + 1, i);
             isused[i] = false;
         }
     }
@@ -68,7 +115,11 @@ int main()
         }
     }
 
-    run(0);
+    printHouses();
+    printChickens();
+    cout << endl;
+
+    run(0, 0);
     cout << min_ccd;
 
     return 0;
