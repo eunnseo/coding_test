@@ -1,0 +1,42 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int n, m;
+int input[10];
+int arr[10];
+
+void func(int idx)
+{
+    if (idx == m)
+    {
+        for (int i = 0; i < m; i++)
+            cout << input[arr[i]] << " ";
+        cout << "\n";
+        return;
+    }
+
+    int st = 0;
+    if (idx > 0) st = arr[idx-1];
+
+    for (int i = st; i < n; i++)
+    {
+        arr[idx] = i;
+        func(idx+1);
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        cin >> input[i];
+
+    sort(input, input+n);
+    func(0);
+
+    return 0;
+}
