@@ -3,8 +3,12 @@
 using namespace std;
 
 int n;
-int p[1002];
-int arr[1002];
+int arr[100002];
+
+bool cmp(int a, int b)
+{
+    return a > b;
+}
 
 int main()
 {
@@ -13,18 +17,16 @@ int main()
 
     cin >> n;
     for (int i = 0; i < n; i++)
-        cin >> p[i];
+        cin >> arr[i];
 
-    sort(p, p+n);
+    sort(arr, arr + n, cmp);
 
-    arr[0] = p[0];
-    int res = arr[0];
-    for (int i = 1; i < n; i++)
+    int res = 0;
+    for (int i = 0; i < n; i++)
     {
-        arr[i] = arr[i-1] + p[i];
-        res += arr[i];
+        res = max((i+1) * arr[i], res);
     }
     cout << res;
-    
+
     return 0;
 }

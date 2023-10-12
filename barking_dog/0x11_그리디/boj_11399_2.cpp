@@ -3,7 +3,6 @@
 using namespace std;
 
 int n;
-int p[1002];
 int arr[1002];
 
 int main()
@@ -13,18 +12,15 @@ int main()
 
     cin >> n;
     for (int i = 0; i < n; i++)
-        cin >> p[i];
+        cin >> arr[i];
+    sort(arr, arr+n);
 
-    sort(p, p+n);
-
-    arr[0] = p[0];
-    int res = arr[0];
-    for (int i = 1; i < n; i++)
+    int res = 0;
+    for (int i = 0; i < n; i++)
     {
-        arr[i] = arr[i-1] + p[i];
-        res += arr[i];
+        res += ((n-i) * arr[i]);
     }
     cout << res;
-    
+
     return 0;
 }

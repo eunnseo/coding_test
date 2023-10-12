@@ -17,12 +17,11 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    int n;
     cin >> n;
     for (int i = 0; i < n; i++)
         cin >> arr[i].first >> arr[i].second;
 
-    sort(arr, arr + n, cmp);
+    sort(arr, arr+n, cmp);
 
     pair<int, int> cur = arr[0];
     int res = 1;
