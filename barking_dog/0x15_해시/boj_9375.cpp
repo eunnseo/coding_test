@@ -1,71 +1,41 @@
 #include <iostream>
 #include <unordered_map>
-#include <vector>
 using namespace std;
 
-unordered_map<string, int> fashion;
-vector<int> fashion_arr;
-int arr[30];
-int res = 0;
-
-void dfs(int idx, int num)
-{
-    if (idx == num)
-    {
-        for (int i = 0; i < num; i++)
-            cout << arr[fashion_arr[i]] << " ";
-            // cout << arr[i] << " ";
-        cout << endl;
-        return;
-    }
-
-    for (int i = 0; i < num; i++)
-    {
-        arr[idx] = i;
-        dfs(idx+1, num);
-    }
-}
+unordered_map<string, int> m_fashion;
+int t, n;
 
 int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    int t;
     cin >> t;
     while (t--)
     {
-        int num;
-        cin >> num;
-        for (int i = 0; i < num; i++)
+        cin >> n;
+        for (int i = 0; i < n; i++)
         {
             string name, kind;
             cin >> name >> kind;
-            if (fashion.find(kind) == fashion.end())
+            if (m_fashion.find(kind) == m_fashion.end())
             {
-                fashion[kind] = 1;
+                m_fashion[kind] = 1;
             }
             else
             {
-                fashion[kind]++;
+                m_fashion[kind]++;
             }
         }
-        for (auto iter = fashion.begin(); iter != fashion.end(); iter++)
-            fashion_arr.push_back(iter->second);
 
-        cout << "fashion_arr = ";
-        for (int i = 0; i < fashion_arr.size(); i++)
+        int res = 1;
+        for (auto iter = m_fashion.begin(); iter != m_fashion.end(); iter++)
         {
-            cout << fashion_arr[i] << " ";
+            res *= (iter->second + 1);
         }
-        cout << endl;
+        cout << res - 1 << "\n";
 
-        dfs(0, 2);
-
-        // for (int i = 0; i < fashion_arr.size(); i++)
-        // {
-        //     dfs(0, i);
-        // }
+        m_fashion.clear();
     }
 
     return 0;
