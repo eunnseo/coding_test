@@ -28,28 +28,32 @@ int main()
             {
                 res += ".";
             }
-            else if (cntX % 2 == 0)
+            else if (cntX == 1 || cntX == 3)
+            {
+                cout << -1;
+                return 0;
+            }
+            else if (cntX == 2)
             {
                 res += "BB.";
                 cntX = 0;
             }
             else
             {
-                cout << -1;
-                return 0;
+                /* do nothing */
             }
         }
     }
 
-    if (cntX % 2 == 0)
+    if (cntX == 4)
+    {
+        res += "AAAA";
+    }
+    else if (cntX == 2)
     {
         res += "BB";
-        cntX = 0;
     }
-    else if (cntX == 0)
-    {
-    }
-    else
+    else if (cntX == 1 || cntX == 3)
     {
         cout << -1;
         return 0;
