@@ -36,7 +36,7 @@ int main()
             arr.push_back({tmp, 1});
     }
 
-    sort(arr.begin(), arr.end(), cmp);
+    stable_sort(arr.begin(), arr.end(), cmp);
 
     for (int i = 0; i < arr.size(); i++)
     {
